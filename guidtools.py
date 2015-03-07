@@ -14,7 +14,7 @@ def substr(instring, offset, length):
 	sliced = instring[offset-1:offset-1+length]
 	return sliced
 
-def oguid_o2ss(oguid):
+def oguid_to_ss(oguid):
 	"""convert oracle guid to windows"""
 	result = substr(oguid, 7, 2) + substr(oguid, 5, 2) + \
 		substr(oguid, 3, 2) + substr(oguid, 1, 2) + '-' + \
@@ -36,13 +36,13 @@ def guid(inguid):
 	if "-" in inguid:
 		result=guid_mover(inguid)
 	else:
-		result=oguid_o2ss(inguid)
+		result=oguid_to_ss(inguid)
 	return result	
 
 def test_guid_conversion(guid):
 	"""test: convert a guid from windows to oracle and back"""
 	new_oguid= guid_mover(guid) 	
-	back_to_old=oguid_o2ss(new_oguid)
+	back_to_old=oguid_to_ss(new_oguid)
 	if guid == back_to_old:
 		return True
 	else:
